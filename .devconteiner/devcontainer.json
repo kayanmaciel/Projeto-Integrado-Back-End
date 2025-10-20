@@ -1,0 +1,22 @@
+{
+  "name": "Projeto Back-End",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "workbench.colorTheme": "Dark Modern"
+      },
+      "extensions": [
+        "ms-azuretools.vscode-containers",
+        "vscjava.vscode-java-pack",
+        "redhat.vscode-quarkus",
+        "cweijan.vscode-mysql-client2"
+      ]
+    }
+  },
+  "forwardPorts": [],
+  "postCreateCommand": "",
+  "postStartCommand": "service mysql start"
+}
