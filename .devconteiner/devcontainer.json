@@ -6,7 +6,7 @@
   "customizations": {
     "vscode": {
       "settings": {
-        "workbench.colorTheme": "Dark Modern"
+        "workbench.colorTheme": "Default Dark+"
       },
       "extensions": [
         "ms-azuretools.vscode-containers",
@@ -16,7 +16,10 @@
       ]
     }
   },
-  "forwardPorts": [],
+  "forwardPorts": [
+    8080,
+    3306
+  ],
   "postCreateCommand": "",
-  "postStartCommand": "service mysql start"
+  "postStartCommand": "service mariadb start"
 }
