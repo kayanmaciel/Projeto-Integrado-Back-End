@@ -1,13 +1,11 @@
 {
-  "name": "Projeto Back-End",
+  "name": "Projeto Back",
   "build": {
     "dockerfile": "Dockerfile"
   },
   "customizations": {
     "vscode": {
-      "settings": {
-        "workbench.colorTheme": "Default Dark+"
-      },
+      "settings": {},
       "extensions": [
         "ms-azuretools.vscode-containers",
         "vscjava.vscode-java-pack",
@@ -16,10 +14,7 @@
       ]
     }
   },
-  "forwardPorts": [
-    8080,
-    3306
-  ],
+  "forwardPorts": [],
   "postCreateCommand": "",
-  "postStartCommand": "service mariadb start"
+  "postStartCommand": "service mysql start"
 }
