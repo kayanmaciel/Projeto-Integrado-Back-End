@@ -3,6 +3,9 @@ package entidades;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,8 +19,8 @@ public class Usuario extends PanacheEntityBase {
     @Column(name = "usu_id")
     public Long id;
 
-    @Column(name = "usu_nome_completo", nullable = false, length = 150)
-    public String nomeCompleto;
+    @Column(name = "usu_nome", nullable = false, length = 150)
+    public String nome;
 
     @Column(name = "usu_email", nullable = false, unique = true, length = 100)
     public String email;
@@ -39,6 +42,7 @@ public class Usuario extends PanacheEntityBase {
     public Plano plano; // Plano vinculado (opcional)
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    @JsonIgnore
     public List<Agendamento> agendamentos; // Relacionamento: Usuário → Agendamento
 
     @CreationTimestamp

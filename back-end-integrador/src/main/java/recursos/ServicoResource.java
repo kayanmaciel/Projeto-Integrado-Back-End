@@ -1,6 +1,6 @@
 package recursos;
 
-import entidades.Plano;
+import entidades.Servico;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -15,58 +15,56 @@ import jakarta.ws.rs.core.Response;
 import java.net.URI;
 import java.util.List;
 
-@Path("/planos")
+@Path("/servicos")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class PlanoResource {
+public class ServicoResource {
 
     // 1. LISTAR TODOS
     @GET
-    public List<Plano> listarTodos() {
-        return Plano.listAll();
+    public List<Servico> listarTodos() {
+        return Servico.listAll(); 
     }
 
-    // 2. BUSCAR POR ID (Para conferir um plano específico)
+    // 2. BUSCAR POR ID
     @GET
     @Path("/{id}")
     public Response buscarPorId(@PathParam("id") Long id) {
-        Plano plano = Plano.findById(id);
-        if (plano == null) {
+        Servico servico = Servico.findById(id);
+        if (servico == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.ok(plano).build();
+        return Response.ok(servico).build();
     }
 
     // 3. CRIAR (POST)
     @POST
     @Transactional
-    public Response criarPlano(Plano plano) {
-        plano.persist();
-        URI createdUri = URI.create("/planos/" + plano.id);
-        return Response.created(createdUri).entity(plano).build();
+    public Response criarServico(Servico servico) {
+        servico.persist();
+        URI createdUri = URI.create("/servicos/" + servico.id);
+        return Response.created(createdUri).entity(servico).build();
     }
 
     // 4. ATUALIZAR (PUT)
     @PUT
     @Path("/{id}")
     @Transactional
-    public Response atualizar(@PathParam("id") Long id, Plano dadosNovos) {
-        // Busca o plano existente
-        Plano planoAntigo = Plano.findById(id);
+    public Response atualizar(@PathParam("id") Long id, Servico dadosNovos) {
+        Servico servicoAntigo = Servico.findById(id);
 
-        if (planoAntigo == null) {
+        if (servicoAntigo == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        // Atualiza os campos com os novos valores
-        planoAntigo.nome = dadosNovos.nome;
-        planoAntigo.descricao = dadosNovos.descricao;
-        planoAntigo.precoPromocional = dadosNovos.precoPromocional;
-        planoAntigo.duracao = dadosNovos.duracao;
-        planoAntigo.beneficios = dadosNovos.beneficios;
+        // Atualiza os dados do serviço
+        servicoAntigo.nome = dadosNovos.nome;
+        servicoAntigo.descricao = dadosNovos.descricao;
+        servicoAntigo.preco = dadosNovos.preco;
+        servicoAntigo.duracao = dadosNovos.duracao;
+        servicoAntigo.status = dadosNovos.status;
 
-        // O Hibernate salva automaticamente as alterações ao fim da transação
-        return Response.ok(planoAntigo).build();
+        return Response.ok(servicoAntigo).build();
     }
 
     // 5. DELETAR (DELETE)
@@ -74,7 +72,7 @@ public class PlanoResource {
     @Path("/{id}")
     @Transactional
     public Response deletar(@PathParam("id") Long id) {
-        boolean deletou = Plano.deleteById(id);
+        boolean deletou = Servico.deleteById(id);
 
         if (!deletou) {
             return Response.status(Response.Status.NOT_FOUND).build();

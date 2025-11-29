@@ -4,6 +4,8 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "servico")
 public class Servico extends PanacheEntityBase {
@@ -29,5 +31,6 @@ public class Servico extends PanacheEntityBase {
     public String status; // ativo/inativo
 
     @OneToMany(mappedBy = "servico", fetch = FetchType.LAZY)
+    @JsonIgnore
     public List<Agendamento> agendamentos; // Relacionamento: Serviço → Agendamento
 }

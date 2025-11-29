@@ -35,3 +35,4 @@ public class Agendamento extends PanacheEntityBase {
     @Column(name = "age_data_criacao", nullable = false, updatable = false)
     public LocalDateTime dataCriacao;
 }
+ 
